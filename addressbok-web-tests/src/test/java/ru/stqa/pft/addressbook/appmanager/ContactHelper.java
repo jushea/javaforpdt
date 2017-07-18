@@ -15,6 +15,10 @@ public class ContactHelper extends HelperBase {
         click(By.name("submit"));
     }
 
+    public void initContactModification() {
+        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    }
+
     public void fillContactForm(ContactData contactData) {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getSurname());
@@ -23,5 +27,13 @@ public class ContactHelper extends HelperBase {
         type(By.name("mobile"), contactData.getMobile());
         type(By.name("work"), contactData.getPhoneWork());
         type(By.name("email"), contactData.getEmail());
+    }
+
+    public void updateContact() {
+        click(By.xpath("//div[@id='content']/form[1]/input[22]"));
+    }
+
+    public void deleteSelectedContact() {
+        click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
     }
 }

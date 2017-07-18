@@ -32,4 +32,12 @@ public class HelperBase {
             return false;
         }
     }
+
+    public void selectGroup() {
+        click(By.name("selected[]"));
+    }
+
+    public void closeAlert() {
+        wd.switchTo().alert().accept();
+    }
 }

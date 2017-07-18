@@ -34,7 +34,7 @@ public class ContactCreationTest {
     }
 
     @Test
-    public void testGroupCreation() {
+    public void testContactCreation() {
         initContactCreation();
         fillContactForm(new ContactData("name", "surname", "Street 123 build 3", "8(3812)123-456", "8-913-123-45-67", "8(3812)789-012", "email_for_this_man@gmail.com"));
         submitContactCreation();

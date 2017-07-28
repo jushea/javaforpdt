@@ -11,9 +11,6 @@ import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by USER on 18.07.2017.
- */
 public class ApplicationManager {
     WebDriver wd;
 
@@ -35,7 +32,7 @@ public class ApplicationManager {
         } else if(browser.equals(BrowserType.IE)) {
             wd = new InternetExplorerDriver();
         }
-        wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
         sessionHelper = new SessionHelper(wd);
         groupHelper = new GroupHelper(wd);

@@ -6,9 +6,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-/**
- * Created by USER on 18.07.2017.
- */
 public class HelperBase {
     protected WebDriver wd;
 
@@ -40,8 +37,8 @@ public class HelperBase {
         }
     }
 
-    public void selectGroup() {
-        click(By.name("selected[]"));
+    public void selectGroup(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void closeAlert() {

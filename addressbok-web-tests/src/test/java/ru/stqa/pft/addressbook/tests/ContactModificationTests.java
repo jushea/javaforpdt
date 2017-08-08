@@ -9,11 +9,11 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ContactModificationTests extends TestBase {
-    @Test
+    @Test(enabled = false)
     public void testContactModification() {
-        app.getNavigationHelper().returnToHomePage();
+        app.goTo().returnToHomePage();
         if(!app.getContactHelper().isThereAContact()) {
-            app.getNavigationHelper().initContactCreation();
+            app.goTo().initContactCreation();
             app.getContactHelper().createContact(new ContactData("name", "surname", "Street 123 build 3",
                     "8(3812)123-456", "8-913-123-45-67", "8(3812)789-012", "email_for_this_man@gmail.com"));
         }

@@ -7,13 +7,12 @@ import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 
 public class ContactCreationTest extends TestBase {
-    @Test
+    @Test(enabled = false)
     public void testContactCreation() {
         List<ContactData> before = app.getContactHelper().getContactList();
-        app.getNavigationHelper().initContactCreation();
+        app.goTo().initContactCreation();
         ContactData contact = new ContactData("name" + RandomUtils.nextInt(), "surname" + RandomUtils.nextInt(), "Street 123 build 3", "8(3812)123-456",
                 "8-913-123-45-67", "8(3812)789-012", "email_for_this_man@gmail.com");
         app.getContactHelper().createContact(contact);

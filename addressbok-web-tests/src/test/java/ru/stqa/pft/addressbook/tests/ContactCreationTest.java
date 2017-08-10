@@ -7,11 +7,12 @@ import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class ContactCreationTest extends TestBase {
     @Test(enabled = false)
     public void testContactCreation() {
-        List<ContactData> before = app.contact().list();
+        Set<ContactData> before = app.contact().all();
         app.goTo().contactCreation();
         ContactData contact = new ContactData().withFirstname("name" + RandomUtils.nextInt())
                 .withSurname("surname" + RandomUtils.nextInt())
@@ -21,14 +22,11 @@ public class ContactCreationTest extends TestBase {
                 .withPhoneWork("8(3812)789-012")
                 .withEmail("email_for_this_man@gmail.com");
         app.contact().create(contact);
-        List<ContactData> after = app.contact().list();
+        Set<ContactData> after = app.contact().all();
         Assert.assertEquals(before.size() + 1, after.size());
 
-        /*contact.setId(after.stream().max((c1, c2) -> Integer.compare(c1.getId(), c2.getId())).get().getId());
+        contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
         before.add(contact);
-        Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-        before.sort(byId);
-        after.sort(byId);*/
         Assert.assertEquals(before, after);
     }
 }

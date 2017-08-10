@@ -84,7 +84,6 @@ public class ContactData {
 
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -92,8 +91,10 @@ public class ContactData {
 
         if (id != that.id) return false;
         if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-        return surname != null ? surname.equals(that.surname) : that.surname == null;
-
+        if (surname != null ? !surname.equals(that.surname) : that.surname != null) return false;
+        if (street != null ? !street.equals(that.street) : that.street != null) return false;
+        if (mobile != null ? !mobile.equals(that.mobile) : that.mobile != null) return false;
+        return email != null ? email.equals(that.email) : that.email == null;
     }
 
     @Override
@@ -101,6 +102,9 @@ public class ContactData {
         int result = id;
         result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (street != null ? street.hashCode() : 0);
+        result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
     }
 

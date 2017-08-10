@@ -6,7 +6,9 @@ import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
     NavigationHelper navigation = new NavigationHelper(wd);
@@ -47,8 +49,9 @@ public class ContactHelper extends HelperBase {
         navigation.homePage();
     }
 
-    public void modify(int item, ContactData contact) {
-        initContactModification(item);
+    public void modify(ContactData contact) {
+        selectGroupById(contact.getId());
+        /*initContactModification();*/
         create(contact);
     }
     public void delete(int index) {
@@ -71,4 +74,27 @@ public class ContactHelper extends HelperBase {
         }
         return contacts;
     }
+
+    public Set<ContactData> all() {
+        Set<ContactData> contacts = new HashSet<>();
+        List<WebElement> elements = wd.findElements(By.xpath(".//*[@id='maintable']/tbody/tr"));
+        String lname, fname;
+        int id;
+        for(int i = 1; i < elements.size(); i++) {
+            lname = elements.get(i).findElement(By.xpath("td[2]")).getText();
+            fname = elements.get(i).findElement(By.xpath("td[3]")).getText();
+            id = Integer.parseInt(elements.get(i).findElement(By.xpath("td[1]/input")).getAttribute("id"));
+            contacts.add(new ContactData().withId(id).withFirstname(fname).withSurname(lname));
+        }
+        return contacts;
+    }
+
+    public void delete(ContactData contact) {
+        selectGroupById(contact.getId());
+        deleteSelectedContact();
+        closeAlert();
+        navigation.homePage();
+    }
+
+
 }

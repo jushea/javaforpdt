@@ -2,6 +2,7 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.apache.commons.lang3.RandomUtils;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
@@ -9,24 +10,36 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ContactModificationTests extends TestBase {
-    @Test(enabled = false)
-    public void testContactModification() {
-        app.goTo().returnToHomePage();
-        if(!app.getContactHelper().isThereAContact()) {
-            app.goTo().initContactCreation();
-            app.getContactHelper().createContact(new ContactData("name", "surname", "Street 123 build 3",
-                    "8(3812)123-456", "8-913-123-45-67", "8(3812)789-012", "email_for_this_man@gmail.com"));
+    @BeforeMethod
+    public void ensurePreconditions() {
+        app.goTo().homePage();
+        if(app.contact().list().size() == 0) {
+            app.goTo().contactCreation();
+            app.contact().create(new ContactData().withFirstname("name" + RandomUtils.nextInt())
+                    .withSurname("surname" + RandomUtils.nextInt())
+                    .withStreet("Street 123 build 3")
+                    .withMobile("8(3812)123-456")
+                    .withPhoneHome("8-913-123-45-67")
+                    .withPhoneWork("8(3812)789-012")
+                    .withEmail("email_for_this_man@gmail.com"));
         }
+    }
 
-        List<ContactData> before = app.getContactHelper().getContactList();
-        int item = 1;
-        app.getContactHelper().initContactModification(item);
+    @Test
+    public void testContactModification() {
+        List<ContactData> before = app.contact().list();
+        int item = before.size();
+        ContactData contact = new ContactData().withId(before.get(item-1).getId())
+                .withFirstname("name" + RandomUtils.nextInt())
+                .withSurname("surname" + RandomUtils.nextInt())
+                .withStreet("Street 123 build 3")
+                .withMobile("8(3812)123-456")
+                .withPhoneWork("8-913-123-45-67")
+                .withPhoneHome("8(3812)789-012")
+                .withEmail("email_for_this_man@gmail.com");
+        app.contact().modify(item, contact);
 
-        ContactData contact = new ContactData(before.get(item-1).getId(), "name" + RandomUtils.nextInt(), "surname" + RandomUtils.nextInt(), "Street 123 build 3", "8(3812)123-456",
-                "8-913-123-45-67", "8(3812)789-012", "email_for_this_man@gmail.com");
-        app.getContactHelper().createContact(contact);
-
-        List<ContactData> after = app.getContactHelper().getContactList();
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(before.size(), after.size());
 
         before.remove(item-1);
@@ -36,4 +49,6 @@ public class ContactModificationTests extends TestBase {
         after.sort(byId);
         Assert.assertEquals(before, after);
     }
+
+
 }

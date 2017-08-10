@@ -1,35 +1,14 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
-    private int id;
-    private final String firstname;
-    private final String surname;
-    private final String street;
-    private final String phoneHome;
-    private final String mobile;
-    private final String phoneWork;
-    private final String email;
-
-    public ContactData(int id, String firstname, String surname, String street, String phoneHome, String mobile, String phoneWork, String email) {
-        this.id = id;
-        this.firstname = firstname;
-        this.surname = surname;
-        this.street = street;
-        this.phoneHome = phoneHome;
-        this.mobile = mobile;
-        this.phoneWork = phoneWork;
-        this.email = email;
-    }
-
-    public ContactData(String firstname, String surname, String street, String phoneHome, String mobile, String phoneWork, String email) {
-        this.firstname = firstname;
-        this.surname = surname;
-        this.street = street;
-        this.phoneHome = phoneHome;
-        this.mobile = mobile;
-        this.phoneWork = phoneWork;
-        this.email = email;
-    }
+    private int id = Integer.MAX_VALUE;
+    private  String firstname;
+    private  String surname;
+    private  String street;
+    private  String phoneHome;
+    private  String mobile;
+    private  String phoneWork;
+    private  String email;
 
     public String getFirstname() {
         return firstname;
@@ -63,9 +42,44 @@ public class ContactData {
         return id;
     }
 
-    public void setId(int id) {
+    public ContactData withFirstname(String firstname) {
+        this.firstname = firstname;
+        return this;
+    }
 
+    public ContactData withSurname(String surname) {
+        this.surname = surname;
+        return this;
+    }
+
+    public ContactData withStreet(String street) {
+        this.street = street;
+        return this;
+    }
+
+    public ContactData withPhoneHome(String phoneHome) {
+        this.phoneHome = phoneHome;
+        return this;
+    }
+
+    public ContactData withMobile(String mobile) {
+        this.mobile = mobile;
+        return this;
+    }
+
+    public ContactData withPhoneWork(String phoneWork) {
+        this.phoneWork = phoneWork;
+        return this;
+    }
+
+    public ContactData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public ContactData withId(int id) {
         this.id = id;
+        return this;
     }
 
     @Override

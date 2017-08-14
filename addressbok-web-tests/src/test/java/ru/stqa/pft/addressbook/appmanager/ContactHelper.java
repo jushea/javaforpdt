@@ -7,9 +7,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
     NavigationHelper navigation = new NavigationHelper(wd);
@@ -51,10 +49,15 @@ public class ContactHelper extends HelperBase {
     }
 
     public void modify(ContactData contact) {
-        selectGroupById(contact.getId());
+        editContactById(contact.getId());
         /*initContactModification();*/
         create(contact);
     }
+
+    private void editContactById(int id) {
+        wd.findElement(By.cssSelector(".center>a[href='edit.php?id=" + id + "']>img")).click();
+    }
+
     public void delete(int index) {
         selectGroup(index);
         deleteSelectedContact();
@@ -91,11 +94,14 @@ public class ContactHelper extends HelperBase {
     }
 
     public void delete(ContactData contact) {
-        selectGroupById(contact.getId());
+        selectContactById(contact.getId());
         deleteSelectedContact();
         closeAlert();
         navigation.homePage();
     }
 
+    private void selectContactById(int id) {
+        wd.findElement(By.xpath(".//*[@id=" + id + "]")).click();
+    }
 
 }

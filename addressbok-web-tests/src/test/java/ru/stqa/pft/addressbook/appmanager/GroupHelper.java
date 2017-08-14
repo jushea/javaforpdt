@@ -68,10 +68,6 @@ public class GroupHelper extends HelperBase{
         returnToGroupPage();
     }
 
-    public boolean isThereAGroup() {
-        return isElementPresent(By.name("selected[]"));
-    }
-
     public Groups all() {
         Groups groups = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));

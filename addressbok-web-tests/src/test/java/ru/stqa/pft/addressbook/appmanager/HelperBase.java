@@ -37,10 +37,6 @@ public class HelperBase {
         }
     }
 
-    public void selectGroup(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
-    }
-
     public void closeAlert() {
         wd.switchTo().alert().accept();
     }

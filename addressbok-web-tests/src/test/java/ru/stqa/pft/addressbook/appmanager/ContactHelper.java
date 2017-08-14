@@ -58,12 +58,7 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.cssSelector(".center>a[href='edit.php?id=" + id + "']>img")).click();
     }
 
-    public void delete(int index) {
-        selectGroup(index);
-        deleteSelectedContact();
-        closeAlert();
-        navigation.homePage();
-    }
+
 
     public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<>();

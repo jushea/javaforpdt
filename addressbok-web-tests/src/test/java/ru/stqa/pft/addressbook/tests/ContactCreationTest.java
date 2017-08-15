@@ -21,11 +21,12 @@ public class ContactCreationTest extends TestBase {
                 .withPhoneWork("8(3812)789-012")
                 .withEmail("email_for_this_man@gmail.com");
         app.contact().create(contact);
+        assertThat(app.contact().getContactCount(), equalTo(before.size()+1));
         Contacts after = app.contact().all();
-        assertThat(after.size(), equalTo(before.size()+1));
 
-        //contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
+
+
 }

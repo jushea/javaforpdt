@@ -1,0 +1,35 @@
+<list>
+  <contact>
+    <firstname>First 1</firstname>
+    <surname>Last 0</surname>
+    <street>Street 0</street>
+    <phoneHome>Homephone 0</phoneHome>
+    <mobile>MobilePhone 0</mobile>
+    <phoneWork>WorkPhone 0</phoneWork>
+    <email1>Email 0</email1>
+    <email2>Email2 0</email2>
+    <email3>Email3 0</email3>
+  </contact>
+  <contact>
+    <firstname>First 1</firstname>
+    <surname>Last 1</surname>
+    <street>Street 1</street>
+    <phoneHome>Homephone 1</phoneHome>
+    <mobile>MobilePhone 1</mobile>
+    <phoneWork>WorkPhone 1</phoneWork>
+    <email1>Email 1</email1>
+    <email2>Email2 1</email2>
+    <email3>Email3 1</email3>
+  </contact>
+  <contact>
+    <firstname>First 1</firstname>
+    <surname>Last 2</surname>
+    <street>Street 2</street>
+    <phoneHome>Homephone 2</phoneHome>
+    <mobile>MobilePhone 2</mobile>
+    <phoneWork>WorkPhone 2</phoneWork>
+    <email1>Email 2</email1>
+    <email2>Email2 2</email2>
+    <email3>Email3 2</email3>
+  </contact>
+</list>

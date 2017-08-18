@@ -1,6 +1,6 @@
 <list>
   <contact>
-    <firstname>First 1</firstname>
+    <firstname>First 0</firstname>
     <surname>Last 0</surname>
     <street>Street 0</street>
     <phoneHome>Homephone 0</phoneHome>
@@ -22,7 +22,7 @@
     <email3>Email3 1</email3>
   </contact>
   <contact>
-    <firstname>First 1</firstname>
+    <firstname>First 2</firstname>
     <surname>Last 2</surname>
     <street>Street 2</street>
     <phoneHome>Homephone 2</phoneHome>

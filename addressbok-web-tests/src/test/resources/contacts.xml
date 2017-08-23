@@ -9,27 +9,6 @@
     <email1>Email 0</email1>
     <email2>Email2 0</email2>
     <email3>Email3 0</email3>
-  </contact>
-  <contact>
-    <firstname>First 1</firstname>
-    <surname>Last 1</surname>
-    <street>Street 1</street>
-    <phoneHome>Homephone 1</phoneHome>
-    <mobile>MobilePhone 1</mobile>
-    <phoneWork>WorkPhone 1</phoneWork>
-    <email1>Email 1</email1>
-    <email2>Email2 1</email2>
-    <email3>Email3 1</email3>
-  </contact>
-  <contact>
-    <firstname>First 2</firstname>
-    <surname>Last 2</surname>
-    <street>Street 2</street>
-    <phoneHome>Homephone 2</phoneHome>
-    <mobile>MobilePhone 2</mobile>
-    <phoneWork>WorkPhone 2</phoneWork>
-    <email1>Email 2</email1>
-    <email2>Email2 2</email2>
-    <email3>Email3 2</email3>
+    <photo>src/test/resources/work.png</photo>
   </contact>
 </list>

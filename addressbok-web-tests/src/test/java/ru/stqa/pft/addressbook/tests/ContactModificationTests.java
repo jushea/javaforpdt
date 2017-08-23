@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
+import java.io.File;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
@@ -21,7 +22,7 @@ public class ContactModificationTests extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         app.goTo().homePage();
-        if(app.contact().list().size() == 0) {
+        if(app.db().contacts().size() == 0) {
             app.goTo().contactCreation();
             app.contact().create(new ContactData().withFirstname("name" + RandomUtils.nextInt())
                     .withSurname("surname" + RandomUtils.nextInt())
@@ -29,13 +30,16 @@ public class ContactModificationTests extends TestBase {
                     .withMobile("8(3812)123-456")
                     .withPhoneHome("8-913-123-45-67")
                     .withPhoneWork("8(3812)789-012")
-                    .withEmail("email_for_this_man@gmail.com"));
+                    .withEmail("email_for_this_man@gmail.com")
+                    .withEmail2("email2@mail.ru")
+                    .withEmail3("email3@mail.ru")
+                    .withPhoto(new File("src/test/resources/work.png")));
         }
     }
 
     @Test
     public void testContactModification() {
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         ContactData modifyContact = before.iterator().next();
         ContactData contact = new ContactData().withId(modifyContact.getId())
                 .withFirstname("name" + RandomUtils.nextInt())
@@ -44,10 +48,13 @@ public class ContactModificationTests extends TestBase {
                 .withMobile("8(3812)123-456")
                 .withPhoneWork("8-913-123-45-67")
                 .withPhoneHome("8(3812)789-012")
-                .withEmail("email_for_this_man@gmail.com");
+                .withEmail("email_for_this_man@gmail.com")
+                .withEmail2("email2@mail.ru")
+                .withEmail3("email3@mail.ru")
+                .withPhoto(new File("src/test/resources/work.png"));
         app.contact().modify(contact);
         assertEquals(app.contact().getContactCount(), before.size());
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
         assertThat(after, equalTo(before.without(modifyContact).withAdded(contact)));
     }
 

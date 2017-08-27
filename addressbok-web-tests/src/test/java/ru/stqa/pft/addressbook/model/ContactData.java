@@ -70,6 +70,9 @@ public class ContactData {
     private Set<GroupData> groups = new HashSet<GroupData>();
 
     public File getPhoto() {
+        if(photo == null) {
+            return null;
+        }
         return new File(photo);
     }
 
@@ -231,5 +234,14 @@ public class ContactData {
         result = 31 * result + (email2 != null ? email2.hashCode() : 0);
         result = 31 * result + (email3 != null ? email3.hashCode() : 0);
         return result;
+    }
+
+    public ContactData inGroup(GroupData group) {
+        try {
+            this.groups.add(group);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return this;
     }
 }

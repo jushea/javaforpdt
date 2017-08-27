@@ -2,10 +2,14 @@ package ru.stqa.pft.addressbook.tests;
 
 import com.thoughtworks.xstream.XStream;
 import org.apache.commons.lang3.RandomUtils;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,6 +24,14 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTest extends TestBase {
+    @BeforeMethod
+    public void ensurePreconditions() {
+        if(app.db().groups().size() == 0) {
+            app.goTo().groupPage();
+            app.group().create(new GroupData().withName("group1").withHeader("header").withFooter("footer"));
+        }
+    }
+
     @DataProvider
     public Iterator<Object[]> validContacts() throws IOException {
         try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))) {
@@ -40,13 +52,11 @@ public class ContactCreationTest extends TestBase {
     public void testContactCreation(ContactData contact) {
         Contacts before = app.db().contacts();
         app.goTo().contactCreation();
-        //File photo = new File("src/test/resources/work.png");
+
         app.contact().create(contact);
         assertThat(app.contact().getContactCount(), equalTo(before.size()+1));
         Contacts after = app.db().contacts();
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
-
-
 }

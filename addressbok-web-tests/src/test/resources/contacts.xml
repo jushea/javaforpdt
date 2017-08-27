@@ -10,5 +10,13 @@
     <email2>Email2 0</email2>
     <email3>Email3 0</email3>
     <photo>src/test/resources/work.png</photo>
+    <groups>
+      <group>
+        <name>group1</name>
+        <header>header</header>
+        <footer>footer</footer>
+        <contacts/>
+      </group>
+    </groups>
   </contact>
 </list>

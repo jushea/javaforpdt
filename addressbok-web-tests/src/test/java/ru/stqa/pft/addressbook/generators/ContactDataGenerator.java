@@ -4,7 +4,10 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import com.thoughtworks.xstream.XStream;
+import ru.stqa.pft.addressbook.appmanager.DbHelper;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -67,11 +70,19 @@ public class ContactDataGenerator {
     private List<ContactData> generateContacts(int count) {
         List<ContactData> contacts = new ArrayList<ContactData>();
         for(int i = 0; i < count; i++) {
-            contacts.add(new ContactData().withFirstname(String.format("First %s", i))
-                    .withSurname(String.format("Last %s", i)).withStreet(String.format("Street %s", i))
-                    .withPhoneHome(String.format("Homephone %s", i)).withMobile(String.format("MobilePhone %s", i))
-                    .withPhoneWork(String.format("WorkPhone %s", i)).withEmail(String.format("Email %s", i))
-                    .withEmail2(String.format("Email2 %s", i)).withEmail3(String.format("Email3 %s", i)));
+            contacts.add(new ContactData()
+                    .withFirstname(String.format("First %s", i))
+                    .withSurname(String.format("Last %s", i))
+                    .withStreet(String.format("Street %s", i))
+                    .withPhoneHome(String.format("Homephone %s", i))
+                    .withMobile(String.format("MobilePhone %s", i))
+                    .withPhoneWork(String.format("WorkPhone %s", i))
+                    .withEmail(String.format("Email %s", i))
+                    .withEmail2(String.format("Email2 %s", i))
+                    .withEmail3(String.format("Email3 %s", i))
+                    .withPhoto(new File("src/test/resources/work.png"))
+                    .inGroup(new GroupData().withName("group1").withHeader("header").withFooter("footer")));
+
         }
         return contacts;
     }

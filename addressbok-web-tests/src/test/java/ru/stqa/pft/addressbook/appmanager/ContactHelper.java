@@ -3,11 +3,15 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ContactHelper extends HelperBase {
     NavigationHelper navigation = new NavigationHelper(wd);
@@ -35,6 +39,20 @@ public class ContactHelper extends HelperBase {
         type(By.name("email2"), contactData.getEmail2());
         type(By.name("email3"), contactData.getEmail3());
         attach(By.name("photo"), contactData.getPhoto());
+
+        if(isElementPresent(By.name("new_group"))) {
+            if(contactData.getGroups().size() > 0) {
+                new Select(wd.findElement(By.name("new_group")))
+                        .selectByVisibleText(contactData.getGroups().iterator().next().getName());
+            }
+        }
+    }
+
+    public boolean isElementPresent(By by) {
+        wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        if(wd.findElements(by).size() == 0) {
+            return false;
+        } else return true;
     }
 
     public void deleteSelectedContact() {
@@ -131,5 +149,19 @@ public class ContactHelper extends HelperBase {
 
     private void initContactModificationById(int id) {
         wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+    }
+
+    public void toGroup(ContactData contact, GroupData group) {
+        wd.findElement(By.id(String.valueOf(contact.getId()))).click();//поиск контакта
+        new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName());//выбрать группу
+        wd.findElement(By.name("add")).click();//нажать кнопку
+        navigation.homePage();
+    }
+
+    public void fromGroup(ContactData contact, GroupData group) {
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText(group.getName());
+        wd.findElement(By.id(String.valueOf(contact.getId()))).click();
+        wd.findElement(By.name("remove")).click();
+        navigation.homePage();
     }
 }

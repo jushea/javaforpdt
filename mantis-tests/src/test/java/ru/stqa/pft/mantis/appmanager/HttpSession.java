@@ -58,4 +58,9 @@ public class HttpSession {
         return body.contains(String.format("<a href=\"/mantisbt-2.5.1/account_page.php\">%s</a>", username));
         //return body.contains(String.format("<span class=\"label hidden-xs label-default arrowed\">%s</span>", username));
     }
+
+    public void select() {
+        HttpGet get = new HttpGet(app.getProperty("web.baseURL") + "/manage_user_page.php");
+
+    }
 }

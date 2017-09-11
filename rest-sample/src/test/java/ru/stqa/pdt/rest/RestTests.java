@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-public class RestTests {
+public class RestTests extends TestBase{
     @Test
     public void testCreateIssue() throws IOException {
         Set<Issue> oldIssues = getIssues();
@@ -45,5 +45,12 @@ public class RestTests {
                 .returnContent().asString();
         JsonElement parsed = new JsonParser().parse(json);
         return parsed.getAsJsonObject().get("issue_id").getAsInt();
+    }
+
+    @Test
+    public void fixedIssue() {
+        skipIfNotFixed(144);
+        skipIfNotFixed(145);
+
     }
 }

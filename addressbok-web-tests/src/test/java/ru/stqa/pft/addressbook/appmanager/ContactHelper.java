@@ -124,7 +124,7 @@ public class ContactHelper extends HelperBase {
     }
 
     private void selectContactById(int id) {
-        wd.findElement(By.xpath(".//*[@id=" + id + "]")).click();
+        wd.findElement(By.xpath(".//*[@id='" + id + "']")).click();
     }
 
     public int getContactCount() {

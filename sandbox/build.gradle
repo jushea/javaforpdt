@@ -11,7 +11,5 @@ dependencies {
 }
 
 test{
-    useTestNG{
-        suites 'src/test/resources/testng-contacts.xml'
-    }
+    useTestNG()
 }

@@ -10,6 +10,8 @@ dependencies {
     compile 'org.testng:testng:6.11'
 }
 
-test {
-    useTestNG()
+test{
+    useTestNG{
+        suites 'src/test/resources/testng-contacts.xml'
+    }
 }
